@@ -7,7 +7,6 @@ const showPopup = ref(false);
 const copyIbanToClipboard = () => {
   navigator.clipboard.writeText(iban)
     .then(() => {
-      //console.log('IBAN copiato negli appunti!');
       showPopup.value = true;
 
       // Nascondi il pop-up dopo 3 secondi

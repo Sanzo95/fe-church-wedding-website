@@ -11,11 +11,8 @@ import { onMounted, onUnmounted, ref } from 'vue'
 
 import { disabilitaEventiDevTools, router } from '../plugins/router'
 
-//le magie di checco
 import { THE_DATE } from '@/costants'
 import LibrettoMessa from '@/views/dashboard/LibrettoMessa.vue'
-import MappaLocationDopoFesta from '@/views/dashboard/MappaLocationDopoFesta.vue'
-import MappaLocationSala from '@/views/dashboard/MappaLocationSala.vue'
 import '../assets/styles/frasanz-dash.scss'
 
 //TODO GESTIRE FOCUS ALL'INIZIO DELLA PAGINA (SU IPHONE DI FRANCESCA NON VA)
@@ -38,40 +35,15 @@ const calculateTimeRemaining = () => {
 };
 
 let countdownInterval;
-var caricaPagina = false;
-let invito = 'chiesa';
+const invito = "chiesa";
 onBeforeMount(() => {
-
-  const route = useRoute();
-  //console.log(route);
-  try {
-    document.getElementById('nascondi-pagina-dashboard').style.display = 'none';
-  } catch (e) { }
-  let data = {};
-  try {
-    if (localStorage.getItem("signInData")) {
-      data = JSON.parse(localStorage.getItem("signInData"));
-    }
-  } catch (e) { }
-  const nome = data.nome;
-  const cognome = data.cognome;
-  const username = data.username;
-  invito = data.invito;
-
-  if (nome == null || nome == "" || cognome == null || cognome == "") {
-    //router.push({ name: 'welcome', query: {} });
-    router.replace({ path: '/welcome' });
-  } else {
-    caricaPagina = true;
-  }
+const route = useRoute();
 });
 onMounted(() => {
   disabilitaEventiDevTools();
   calculateTimeRemaining();
   countdownInterval = setInterval(calculateTimeRemaining, 1000);
-
-  if (caricaPagina) {
-    try {
+  try {
       var primoDiv = document.getElementById('nascondi-pagina-dashboard');
       primoDiv.style.display = 'block';
       setTimeout(() => VueScrollTo.scrollTo(primoDiv, 1000), 1);
@@ -79,8 +51,7 @@ onMounted(() => {
     } catch (e) {
       console.log("element not found: nascondi-pagina-dashboard");
     }
-  }
-});
+  });
 
 onUnmounted(() => {
   clearInterval(countdownInterval);
@@ -135,15 +106,8 @@ onUnmounted(() => {
 
       <VCol cols="12">
         <VRow>
-          <VCol cols="12" md="6">
+          <VCol cols="12" >
             <MappaChiesa />
-          </VCol>
-          <VCol cols="12" md="6" v-if="invito === 'dopofesta'">
-            <MappaLocationDopoFesta />
-          </VCol>
-
-          <VCol cols="12" md="6" v-if="invito === 'sala'">
-            <MappaLocationSala />
           </VCol>
         </VRow>
       </VCol>

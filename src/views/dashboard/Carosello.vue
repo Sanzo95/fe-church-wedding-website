@@ -1,7 +1,6 @@
 <script setup>
 import { BASE_URL } from '@/costants';
 
-//TODO le foto si vedono male su smartphone, bisogna fare qualche modifica al carosello
 const items = [
   `${BASE_URL}/photos/photo_1.jpg`,
   `${BASE_URL}/photos/photo_2.jpg`,
