@@ -1,0 +1,10 @@
+//TODO diminuire il numero dei file css
+.v-application__wrap {
+  overflow-x: hidden;
+}
+
+.v-text-wrap-justify>.v-card-item>.v-card-item__content>.v-card-title,
+.v-text-wrap-justify {
+  text-wrap: wrap;
+  text-align: justify;
+}
